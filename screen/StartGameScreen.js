@@ -3,8 +3,9 @@ import {Button, StyleSheet, Text, TouchableWithoutFeedback, View, Keyboard, Aler
 import Card from '../components/Card'
 import Colors from '../constants/colors'
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 
-const StartGameScreen = prop => {
+const StartGameScreen = props => {
 
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
@@ -32,12 +33,18 @@ const StartGameScreen = prop => {
         setConfirmed(true);
         setSelectedNumber(chosenNumber);
         setEnteredValue('');
+        Keyboard.dismiss();
     }
 
     let confirmedOutput;
 
     if (confirmed) {
-        confirmedOutput = <Text>Chosen number: {selectedNumber}</Text>
+        confirmedOutput = (
+            <Card style={styles.summaryContainer}>
+                <Text>You selected</Text>
+                <NumberContainer>{selectedNumber}</NumberContainer>
+                <Button title={"START GAME"} onPress={() => props.onStartGame(selectedNumber)}/>
+            </Card>)
     }
 
     return (
@@ -97,6 +104,10 @@ const styles = StyleSheet.create({
     input: {
         width: 50,
         textAlign: 'center'
+    },
+    summaryContainer: {
+        margin: 20,
+        alignItems: 'center'
     }
 });
 
