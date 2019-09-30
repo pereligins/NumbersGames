@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Header from "./components/Header";
 import StartGameScreen from "./screen/StartGameScreen";
 import GameScreen from "./screen/GameScreen";
@@ -21,7 +21,8 @@ export default function App() {
     const [dataLoaded, setDataLoaded] = useState(false);
 
     if (!dataLoaded) {
-        return <AppLoading startAsync={fetchFonts} onFinish={() => setDataLoaded(true)} onError={(err) => console.log(err)}/>;
+        return <AppLoading startAsync={fetchFonts} onFinish={() => setDataLoaded(true)}
+                           onError={(err) => console.log(err)}/>;
     }
 
     const configureNewGameHandler = () => {
@@ -41,19 +42,20 @@ export default function App() {
     if (userNumber && guessRounds <= 0) {
         content = <GameScreen userChoise={userNumber} onGameOver={gameOverHandler}/>;
     } else if (guessRounds > 0) {
-        content = <GameOverScreen roundsNumber={guessRounds} userNumber={userNumber} onRestart={configureNewGameHandler}/>
+        content =
+            <GameOverScreen roundsNumber={guessRounds} userNumber={userNumber} onRestart={configureNewGameHandler}/>
     }
 
-  return (
-    <View style={styles.screen}>
-      <Header title='Guess a Number'/>
-      {content}
-    </View>
-  );
+    return (
+        <View style={styles.screen}>
+            <Header title='Guess a Number'/>
+            {content}
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1
-  }
+    screen: {
+        flex: 1
+    }
 });
